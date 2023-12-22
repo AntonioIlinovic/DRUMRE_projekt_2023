@@ -1,23 +1,14 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, setDoc, doc } from 'firebase/firestore';
-
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyA3IttEIo6xfRsCGDiMsEpOnAJs94alo00",
-    authDomain: "drumre-15d77.firebaseapp.com",
-    projectId: "drumre-15d77",
-    storageBucket: "drumre-15d77.appspot.com",
-    messagingSenderId: "91050764028",
-    appId: "1:91050764028:web:d86960424bb76444b09979",
-    databaseURL: "https://drumre-15d77-default-rtdb.europe-west1.firebasedatabase.app/"
-};
+import { firebaseConfig, APIKEY } from './firebase';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const APIKEY = '7ed9cecf1c8468086891b0434dfa7e1e';
-const MOVIES_TO_FETCH = 1000;
+// Number of movies to fetch from TMDB. For testing purposes, keep this number low,
+// so it doesn't use up Firebase quota
+const MOVIES_TO_FETCH = 20;
 const MOVIES_PER_PAGE = 20;
 
 const fetchMovies = async (page) => {
