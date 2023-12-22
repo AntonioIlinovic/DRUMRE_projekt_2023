@@ -23,6 +23,12 @@ function Navigacija() {
             headername: "Favorites",
             Name: "Favorites",
             link:"/favorites"
+        },
+        {
+            id: 3,
+            headername: "User",
+            Name: "User",
+            link:"/user"
         }
     ]
 

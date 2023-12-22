@@ -5,6 +5,7 @@ import Navigacija from './components/Navigacija'
 import Main from './pages/Main'
 import Favorites from './pages/Favorites';
 import { MovieProvider } from "./Contextpage";
+import User from './pages/User';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='/moviedetail/:id' element={<Detalji />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/search/:query" element={<Main/>}/>
+          <Route path="/user" element={<User />} />
         </Routes>
       </div>
     </MovieProvider>
