@@ -38,6 +38,7 @@ export function MovieProvider({ children }) {
     setTotalPage(filteredGenre.total_pages);
     setLoader(false);
     setHeader("Recommended");
+
   };
 
   const fetchSearch = async (query) => {

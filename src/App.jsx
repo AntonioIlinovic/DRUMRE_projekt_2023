@@ -6,6 +6,7 @@ import Main from './pages/Main'
 import Favorites from './pages/Favorites';
 import { MovieProvider } from "./Contextpage";
 import User from './pages/User';
+import Popular from './pages/Popular.jsx'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/search/:query" element={<Main/>}/>
           <Route path="/user" element={<User />} />
+          <Route path="/popular" element={<Popular />}   />
         </Routes>
       </div>
     </MovieProvider>
