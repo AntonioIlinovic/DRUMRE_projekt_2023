@@ -1,13 +1,15 @@
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth"; 
 
+// Firebase configuration
 const firebaseConfig = {
-    apiKey: 'AIzaSyAi0pmXWO6CKTPjwPpgKvn9OhEYdy0-RC8',
-    authDomain: 'movies-4378d.firebaseapp.com',
-    projectId: 'movies-4378d',
-    storageBucket: 'movies-4378d.appspot.com',
-    messagingSenderId: '535037281692',
-    appId: '1:535037281692:web:7d54821ab3787d6ef3b459'
+    apiKey: "AIzaSyA3IttEIo6xfRsCGDiMsEpOnAJs94alo00",
+    authDomain: "drumre-15d77.firebaseapp.com",
+    projectId: "drumre-15d77",
+    storageBucket: "drumre-15d77.appspot.com",
+    messagingSenderId: "91050764028",
+    appId: "1:91050764028:web:d86960424bb76444b09979",
+    databaseURL: "https://drumre-15d77-default-rtdb.europe-west1.firebasedatabase.app/"
 };
 
 const app = initializeApp(firebaseConfig);

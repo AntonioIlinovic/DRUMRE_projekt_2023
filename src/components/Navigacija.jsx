@@ -29,6 +29,12 @@ function Navigacija() {
             headername: "User",
             Name: "User",
             link:"/user"
+        },
+        {
+            id: 4,
+            headername: "Popular Movies",
+            Name: "Popular",
+            link:"/popular"
         }
     ]
 
