@@ -3,7 +3,7 @@ import { getFirestore, collection, query, orderBy, startAfter, limit, getDocs } 
 import { initializeApp } from 'firebase/app';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Kartica from '../components/Kartica'; // Make sure the path to Kartica is correct
-import { firebaseConfig } from '../../firebase.js'; // Your Firebase configuration file
+import { firebaseConfig } from '../../importDB.js'; // Your Firebase configuration file
 
 // Initialize Firebase
 initializeApp(firebaseConfig);

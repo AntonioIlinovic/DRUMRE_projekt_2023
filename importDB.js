@@ -1,13 +1,42 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, setDoc, doc } from 'firebase/firestore';
-import { firebaseConfig, APIKEY } from './firebase';
+
+
+// Firebase and TMDB API configuration hrvoje
+/*
+export const firebaseConfig = {
+    apiKey: "AIzaSyA3IttEIo6xfRsCGDiMsEpOnAJs94alo00",
+    authDomain: "drumre-15d77.firebaseapp.com",
+    projectId: "drumre-15d77",
+    storageBucket: "drumre-15d77.appspot.com",
+    messagingSenderId: "91050764028",
+    appId: "1:91050764028:web:d86960424bb76444b09979",
+    databaseURL: "https://drumre-15d77-default-rtdb.europe-west1.firebasedatabase.app/"
+};
+// API key hrvoje
+const APIKEY = '7ed9cecf1c8468086891b0434dfa7e1e';
+ */
+
+// Firebase and TMDB API configuration antonio
+export const firebaseConfig = {
+    apiKey: "AIzaSyA-VRfJouNO5Ncf0IK2sOGvikqACsEgqtE",
+    authDomain: "drumre-movies-project.firebaseapp.com",
+    databaseURL: "https://drumre-movies-project-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "drumre-movies-project",
+    storageBucket: "drumre-movies-project.appspot.com",
+    messagingSenderId: "374253317734",
+    appId: "1:374253317734:web:3ac85c6438fafaa6af87a7"
+};
+// API key antonio
+const APIKEY = 'd5287db2785ca177cbb4fd9b9d6cbc9b';
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Number of movies to fetch from TMDB. For testing purposes, keep this number low,
-// so it doesn't use up Firebase quota
+
+// Number of movies to fetch, for development purposes, keep it low
 const MOVIES_TO_FETCH = 20;
 const MOVIES_PER_PAGE = 20;
 
