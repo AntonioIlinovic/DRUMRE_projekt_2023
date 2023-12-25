@@ -2,9 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Contextpage from '../Contextpage';
 import { HiChevronLeft } from 'react-icons/hi';
+import { APIKEY } from "../../importDB.js";
 
 export const Detalji = () => {
-  const APIKEY = '7ed9cecf1c8468086891b0434dfa7e1e';
   const { loader, setLoader } = useContext(Contextpage);
   const { id } = useParams();
   const [moviedet, setMoviedet] = useState([]);

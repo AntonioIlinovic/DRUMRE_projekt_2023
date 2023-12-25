@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useAuthState } from "react-firebase-hooks/auth"
+import { APIKEY } from "../importDB.js";
 
 const Contextpage = createContext();
 
@@ -20,7 +21,6 @@ export function MovieProvider({ children }) {
   const [user, setUser] = useAuthState(auth)
   const navigate = useNavigate();
 
-  const APIKEY = '7ed9cecf1c8468086891b0434dfa7e1e';
 
   useEffect(() => {
     if (page < 1) {

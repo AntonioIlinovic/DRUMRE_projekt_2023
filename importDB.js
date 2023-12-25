@@ -28,7 +28,7 @@ export const firebaseConfig = {
     appId: "1:374253317734:web:3ac85c6438fafaa6af87a7"
 };
 // API key antonio
-const APIKEY = 'd5287db2785ca177cbb4fd9b9d6cbc9b';
+export const APIKEY = 'd5287db2785ca177cbb4fd9b9d6cbc9b';
 
 
 // Initialize Firebase
