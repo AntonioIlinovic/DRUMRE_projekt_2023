@@ -47,39 +47,28 @@ const MoviesList = () => {
     return (
         <div className='w-full bg-[#10141e] md:p-10 mb-20 md:mb-0'>
             <Naslov />
-            {isLoggedIn ? (
-                <motion.div
-                    layout
-                    className="w-full md:p-2 flex flex-wrap justify-center"
-                    style={{ gap: '20px' }}
+            <motion.div
+                layout
+                className="w-full md:p-2 flex flex-wrap justify-center"
+                style={{ gap: '20px' }}
+            >
+                <InfiniteScroll
+                    dataLength={movies.length}
+                    next={fetchMovies}
+                    hasMore={hasMore}
+                    endMessage={
+                        <p style={{ textAlign: 'center' }}>
+                            <b>Yay! You have seen it all</b>
+                        </p>
+                    }
                 >
-                    <InfiniteScroll
-                        dataLength={movies.length}
-                        next={fetchMovies}
-                        hasMore={hasMore}
-                        endMessage={
-                            <p style={{ textAlign: 'center' }}>
-                                <b>Yay! You have seen it all</b>
-                            </p>
-                        }
-                    >
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-10 gap-4" style={{ width: '100%' }}>
-                            {movies.map((movie, index) => (
-                                <Kartica key={index} movie={movie} />
-                            ))}
-                        </div>
-                    </InfiniteScroll>
-                </motion.div>
-            ) : (
-                <motion.div
-                    layout
-                    className="w-full md:p-2 flex flex-wrap relative justify-evenly md:justify-around"
-                >
-                    <div className="text-white text-center">
-                        <p className="text-lg">You are not logged in.</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-10 gap-4" style={{ width: '100%' }}>
+                        {movies.map((movie, index) => (
+                            <Kartica key={index} movie={movie} />
+                        ))}
                     </div>
-                </motion.div>
-            )}
+                </InfiniteScroll>
+            </motion.div>
         </div>
     );
 };
