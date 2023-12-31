@@ -4,4 +4,6 @@ import { firebaseConfig} from "./importDB.js";
 
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth();
+const auth = getAuth();
+
+export {app, auth};

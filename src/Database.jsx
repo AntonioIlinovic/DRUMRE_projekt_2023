@@ -1,7 +1,7 @@
 import { getDatabase, ref, set, get } from 'firebase/database'; // Import Firebase database functions
 
 // Import the Firebase app instance, auth, and user if needed
-import { app, auth } from './firebaseConfig'; // Update the path to your firebaseConfig file
+import { app, auth } from '../firebase'; // Update the path to your firebaseConfig file
 
 // Function to synchronize data between local storage and Firebase for the current user
 function synchronizeUserData() {
