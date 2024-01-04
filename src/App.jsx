@@ -14,14 +14,14 @@ function App() {
     <MovieProvider>
       <Navigacija />
       <div className="md:ml-[15rem]">
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/moviedetail/:id' element={<Detalji />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/search/:query" element={<Main/>}/>
-          <Route path="/user" element={<User />} />
-          <Route path="/popular" element={<Popular />}   />
-        </Routes>
+          <Routes>
+              <Route path='/fromapi' element={<Main />} />
+              <Route path='/moviedetail/:id' element={<Detalji />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/search/:query" element={<Main/>}/>
+              <Route path="/user" element={<User />} />
+              <Route path="/" element={<Popular />}   />
+          </Routes>
       </div>
     </MovieProvider>
   )

@@ -14,9 +14,9 @@ function Navigacija() {
     const Navdata = [
         {
             id: 1,
-            headername: "Recommended",
-            Name: "Recommended",
-            link : "/"
+            headername: "Popular Movies",
+            Name: "Popular",
+            link:"/"
         },
         {
             id: 2,
@@ -32,9 +32,9 @@ function Navigacija() {
         },
         {
             id: 4,
-            headername: "Popular Movies",
-            Name: "Popular",
-            link:"/popular"
+            headername: "From API",
+            Name: "FromAPI",
+            link : "/fromapi"
         }
     ]
 

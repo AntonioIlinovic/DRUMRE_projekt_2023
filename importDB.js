@@ -3,7 +3,7 @@ import { getFirestore, collection, setDoc, doc } from 'firebase/firestore';
 
 
 // Firebase and TMDB API configuration hrvoje
-/*
+
 export const firebaseConfig = {
     apiKey: "AIzaSyA3IttEIo6xfRsCGDiMsEpOnAJs94alo00",
     authDomain: "drumre-15d77.firebaseapp.com",
@@ -14,10 +14,11 @@ export const firebaseConfig = {
     databaseURL: "https://drumre-15d77-default-rtdb.europe-west1.firebasedatabase.app/"
 };
 // API key hrvoje
-const APIKEY = '7ed9cecf1c8468086891b0434dfa7e1e';
- */
+export const APIKEY = '7ed9cecf1c8468086891b0434dfa7e1e';
+
 
 // Firebase and TMDB API configuration antonio
+/*
 export const firebaseConfig = {
     apiKey: "AIzaSyA-VRfJouNO5Ncf0IK2sOGvikqACsEgqtE",
     authDomain: "drumre-movies-project.firebaseapp.com",
@@ -29,7 +30,7 @@ export const firebaseConfig = {
 };
 // API key antonio
 export const APIKEY = 'd5287db2785ca177cbb4fd9b9d6cbc9b';
-
+*/
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
