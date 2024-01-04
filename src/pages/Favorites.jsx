@@ -34,7 +34,10 @@ function Favorites() {
         isLoggedIn ? (
             <>
                 <div className='w-full bg-[#10141e] md:p-10 mb-20 md:mb-0'>
-                    <Naslov />
+                    <header
+                        className={"flex  items-center justify-center text-3xl md:text-4xl font-bold text-red-500 py-3 px-5 md:px-10"}>
+                        Favorite Movies
+                    </header>
                     <motion.div
                         layout
                         className="w-full md:p-2 flex flex-wrap relative justify-evenly md:justify-around">

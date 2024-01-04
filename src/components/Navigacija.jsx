@@ -32,9 +32,9 @@ function Navigacija() {
         },
         {
             id: 4,
-            headername: "From API",
-            Name: "FromAPI",
-            link : "/fromapi"
+            headername: "Recommended",
+            Name: "Recommended",
+            link : "/recommended"
         }
     ]
 

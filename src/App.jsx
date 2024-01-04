@@ -15,7 +15,7 @@ function App() {
       <Navigacija />
       <div className="md:ml-[15rem]">
           <Routes>
-              <Route path='/fromapi' element={<Main />} />
+              <Route path='/recommended' element={<Main />} />
               <Route path='/moviedetail/:id' element={<Detalji />} />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/search/:query" element={<Main/>}/>
