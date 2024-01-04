@@ -4,30 +4,42 @@ import { motion } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import Contextpage from '../Contextpage';
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '../../importDB.js';
+import {doc, getDoc, getFirestore, setDoc, deleteDoc} from "firebase/firestore";
+
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+const db = getFirestore();
 
 function Kartica({ movie }) {
     const { user } = useContext(Contextpage);
-
     const [isBookmarked, setIsBookmarked] = useState(null);
 
     useEffect(() => {
-        if (localStorage.getItem(movie.id)) {
-            setIsBookmarked(true);
-        } else {
-            setIsBookmarked(false);
-        }
-    }, [movie.id]);
+        const checkBookmark = async () => {
+            if (user) {
+                const movieRef = doc(db, "Users", user.email, "BookmarkedMovies", movie.id.toString());
+                const docSnap = await getDoc(movieRef);
+                setIsBookmarked(docSnap.exists());
+            }
+        };
 
-    const BookmarkMovie = () => {
+        checkBookmark();
+    }, [user, movie.id]);
+
+    const BookmarkMovie = async () => {
         if (user) {
+            const movieRef = doc(db, "Users", user.email, "BookmarkedMovies", movie.id.toString());
             setIsBookmarked(!isBookmarked);
             if (isBookmarked) {
-                localStorage.removeItem(movie.id);
+                await deleteDoc(movieRef);
             } else {
-                localStorage.setItem(movie.id, JSON.stringify(movie));
+                await setDoc(movieRef, {...movie});
             }
         }
-    }
+    };
 
     return (
         <motion.div

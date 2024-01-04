@@ -3,9 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useAuthState } from "react-firebase-hooks/auth"
-import { APIKEY } from "../importDB.js";
+import {APIKEY, firebaseConfig} from "../importDB.js";
+import {initializeApp} from "firebase/app";
+import {doc, getDoc, getFirestore, setDoc} from "firebase/firestore";
 
 const Contextpage = createContext();
+
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+const db = getFirestore();
 
 export function MovieProvider({ children }) {
 
@@ -28,6 +35,14 @@ export function MovieProvider({ children }) {
     }
   }, [page]);
 
+    const addUserToFirestore = async (userEmail) => {
+        const userRef = doc(db, "Users", userEmail);
+        const docSnap = await getDoc(userRef);
+
+        if (!docSnap.exists()) {
+            await setDoc(userRef, { email: userEmail });
+        }
+    };
 
   const filteredGenre = async () => {
     const data = await fetch(
@@ -69,15 +84,17 @@ export function MovieProvider({ children }) {
   //<========= firebase Google Authentication ========>
   const googleProvider = new GoogleAuthProvider();// =====> google auth provider
 
-  const GoogleLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      navigate("/")
-    } catch (err) {
-      console.log(err)
-      navigate("/")
-    }
-  }
+    const GoogleLogin = async () => {
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            const userEmail = result.user.email;
+            await addUserToFirestore(userEmail);
+            navigate("/");
+        } catch (err) {
+            console.log(err);
+            navigate("/");
+        }
+    };
 
   return (
     <Contextpage.Provider
