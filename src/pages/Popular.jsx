@@ -45,32 +45,43 @@ const MoviesList = () => {
     };
 
     return (
-        <div className='w-full bg-[#10141e] md:p-10 mb-20 md:mb-0'>
-            <Naslov />
-            <motion.div
-                layout
-                className="w-full md:p-2 flex flex-wrap justify-center"
-                style={{ gap: '20px' }}
-            >
-                <InfiniteScroll
-                    dataLength={movies.length}
-                    next={fetchMovies}
-                    hasMore={hasMore}
-                    endMessage={
-                        <p style={{ textAlign: 'center' }}>
-                            <b>Yay! You have seen it all</b>
-                        </p>
-                    }
-                >
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-10 gap-4" style={{ width: '100%' }}>
-                        {movies.map((movie, index) => (
-                            <Kartica key={index} movie={movie} />
-                        ))}
-                    </div>
-                </InfiniteScroll>
-            </motion.div>
-        </div>
-    );
+        isLoggedIn ? (
+            <div>
+                <>
+                    <h2>Movies List From the Firestore DataBase -> NOSQL DB</h2>
+                    <InfiniteScroll
+                        dataLength={movies.length}
+                        next={fetchMovies}
+                        hasMore={hasMore}
+                        endMessage={
+                            <p style={{textAlign: 'center'}}>
+                                <b>Yay! You have seen it all</b>
+                            </p>
+                        }
+                    >
+                        <div className="grid grid-cols-5 gap-4" style={{padding: '0 50px'}}>
+                            {movies.map((movie, index) => (
+                                <Kartica key={index} movie={movie}/>
+                            ))}
+                        </div>
+                    </InfiniteScroll>
+                </>
+            </div>
+        ) : (
+            <>
+                <div className='w-full bg-[#10141e] md:p-10 mb-20 md:mb-0'>
+                    <Naslov />
+                    <motion.div
+                        layout
+                        className="w-full md:p-2 flex flex-wrap relative justify-evenly md:justify-around">
+                        <div className="text-white text-center">
+                            <p className="text-lg">You are not logged in.</p>
+                        </div>
+                    </motion.div>
+                </div>
+            </>
+            )
+        );
 };
 
 export default MoviesList;
