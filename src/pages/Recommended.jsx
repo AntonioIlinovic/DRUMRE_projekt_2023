@@ -14,7 +14,7 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 
 // Hardcoded genre map
-const GENRE_MAP = {
+export const GENRE_MAP = {
     28: 'Action',
     12: 'Adventure',
     16: 'Animation',
@@ -68,7 +68,7 @@ const MoviesList = () => {
             setFavoriteMoviesIds(prevFavoriteMoviesIds => [...prevFavoriteMoviesIds, movie.id])
         });
 
-        // Get the top 2 genres
+        // Get the top 1 genres
         const topGenresIds = Object.entries(genreCounts)
             .sort((a, b) => b[1] - a[1])
             .slice(0, 1)
