@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import logo from "../../logo.png";
-import { Link } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import Contextpage from '../Contextpage';
 import { FcGoogle } from 'react-icons/fc'
 import { motion } from "framer-motion";
@@ -10,11 +10,12 @@ import { auth } from '../../firebase';
 function Navigacija() {
     const { header, user } = useContext(Contextpage);
     const [activemobile, setActivemobile] = useState(false);
+    const location = useLocation(); // Get the current location
 
     const Navdata = [
         {
             id: 1,
-            headername: "Popular Movies",
+            headername: "Popular",
             Name: "Popular",
             link:"/"
         },
@@ -63,7 +64,8 @@ function Navigacija() {
                 <ul className="text-white font-semibold text-[16px] text-center px-5">
                     {Navdata.map((data) => (
                         <Link key={data.id} to={data.link}>
-                            <li className={`${header == data.headername ? 'border-red-600 text-white' : 'bg-gray-500/20 border-black'} p-2 my-2  hover:bg-black-500/20 rounded-[5px] border-2 hover:border-red-600`} onClick={() => setActivemobile(!activemobile)}>
+                            <li className={`${location.pathname === data.link ? 'border-red-600 text-white' : 'bg-gray-500/20 border-black'} p-2 my-2  hover:bg-black-500/20 rounded-[5px] border-2 hover:border-red-600`}
+                                onClick={() => setActivemobile(false)}>
                                 {data.Name}
                             </li>
                         </Link>
@@ -73,11 +75,13 @@ function Navigacija() {
                 <div className="absolute bottom-0 w-full p-5 md:p-2 text-white">
                     {user ? (
                         <>
-                            <div className="w-full bg-gray-900 px-5 py-2 gap-4 rounded-xl flex items-center font-semibold border-2 border-red-100/10">
-                                <img src={user.photoURL} alt="user" className="h-10 rounded-full" />
+                            <div
+                                className="w-full bg-gray-900 px-5 py-2 gap-4 rounded-xl flex items-center font-semibold border-2 border-red-100/10">
+                                <img src={user.photoURL} alt="user" className="h-10 rounded-full"/>
                                 <h1>{user.displayName}</h1>
                             </div>
-                            <div className="cursor-pointer bg-red-500 flex justify-center items-center p-2 rounded-xl mt-2 hover:bg-red-500/20 rounded-[5px]" onClick={() => auth.signOut()}>
+                            <div
+                                className="cursor-pointer bg-red-500 flex justify-center items-center p-2 rounded-xl mt-2 hover:bg-red-500/20 rounded-[5px]" onClick={() => auth.signOut()}>
                                 <h1>Logout</h1>
                             </div>
                         </>
