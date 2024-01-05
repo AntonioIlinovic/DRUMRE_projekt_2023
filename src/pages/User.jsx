@@ -1,18 +1,18 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from '../../importDB.js';
+import React, {useContext, useState, useEffect} from 'react';
+import {getFirestore, collection, getDocs} from 'firebase/firestore';
+import {initializeApp} from 'firebase/app';
+import {firebaseConfig} from '../../importDB.js';
 import Naslov from '../components/Naslov';
 import Contextpage from '../Contextpage';
-import { motion } from 'framer-motion';
-import { GENRE_MAP } from "./Recommended.jsx";
+import {motion} from 'framer-motion';
+import {GENRE_MAP} from "./Recommended.jsx";
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
 const db = getFirestore();
 
 function User() {
-    const { user } = useContext(Contextpage);
+    const {user} = useContext(Contextpage);
     const isLoggedIn = !!user;
 
     const [bookmarkedMoviesCount, setBookmarkedMoviesCount] = useState(0);
@@ -43,19 +43,23 @@ function User() {
     return (
         <>
             <div className='w-full bg-[#10141e] md:p-10 mb-20 md:mb-0'>
-                <header className="flex items-center justify-center text-3xl md:text-4xl font-bold text-red-500 py-3 px-5 md:px-10">
+                <header
+                    className="flex items-center justify-center text-3xl md:text-4xl font-bold text-red-500 py-3 px-5 md:px-10">
                     User Details
                 </header>
+
                 <motion.div layout className="w-full md:p-2 flex flex-wrap relative justify-evenly md:justify-around">
-                    <div className="text-white text-center">
+                    <div className="text-white text-left">
                         {isLoggedIn ? (
                             <div className="user-info">
-                                <p className="text-lg">Email: {user.email}</p>
-                                <p className="text-lg">Name: {user.displayName || 'N/A'}</p>
-                                <p className="text-lg">Favorite Movies: {bookmarkedMoviesCount}</p>
-                                <p className="text-lg">Favorite Genres: {favoriteGenres.map((genreId) => GENRE_MAP[genreId]).join(', ')}</p>
+                                <p className="text-lg"><span className="font-bold">Email:</span> {user.email}</p>
+                                <p className="text-lg"><span className="font-bold">Name:</span> {user.displayName || 'N/A'}</p>
+                                <p className="text-lg"><span className="font-bold">Favorite Movies:</span> {bookmarkedMoviesCount}</p>
+                                <p className="text-lg"><span className="font-bold">Favorite
+                                    Genres:</span> {favoriteGenres.map((genreId) => GENRE_MAP[genreId]).join(', ')}</p>
                                 {user.photoURL && (
-                                    <img src={user.photoURL} alt="user" className="w-40 h-40 rounded-full mx-auto my-4" />
+                                    <img src={user.photoURL} alt="user"
+                                         className="w-40 h-40 rounded-full mx-auto my-4"/>
                                 )}
                             </div>
                         ) : (
