@@ -12,7 +12,7 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 
 function Favorites() {
-    const { user, loader } = useContext(Contextpage);
+    const { user, loader, setLoader } = useContext(Contextpage);
     const [bookmarkedMovies, setBookmarkedMovies] = useState([]);
 
     const isLoggedIn = !!user;
@@ -24,6 +24,7 @@ function Favorites() {
                 const querySnapshot = await getDocs(bookmarksRef);
                 const fetchedMovies = querySnapshot.docs.map(doc => doc.data());
                 setBookmarkedMovies(fetchedMovies);
+                setLoader(false);
             }
         };
 
