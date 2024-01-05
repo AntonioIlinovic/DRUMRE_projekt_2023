@@ -38,7 +38,7 @@ const db = getFirestore(app);
 
 
 // Number of movies to fetch, for development purposes, keep it low
-const MOVIES_TO_FETCH = 20;
+const MOVIES_TO_FETCH = 1000;
 const MOVIES_PER_PAGE = 20;
 
 const fetchMovies = async (page) => {
@@ -57,7 +57,7 @@ const fetchMovies = async (page) => {
 const saveMovieToFirebase = async (movie) => {
     try {
         // Use collection and doc functions from Firestore
-        const movieRef = doc(collection(db, 'movies'), `${movie.id}`);
+        const movieRef = doc(collection(db, 'Movies'), `${movie.id}`);
         await setDoc(movieRef, movie);
     } catch (error) {
         console.error('Error saving movie to Firebase:', error);

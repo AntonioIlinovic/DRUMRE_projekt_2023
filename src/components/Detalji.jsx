@@ -3,8 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import Contextpage from '../Contextpage';
 import { HiChevronLeft } from 'react-icons/hi';
 import { APIKEY, firebaseConfig } from "../../importDB.js";
-import {initializeApp} from "firebase/app";
-import {doc, getFirestore, getDoc} from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { doc, getFirestore, getDoc } from "firebase/firestore";
 
 initializeApp(firebaseConfig);
 const db = getFirestore();
@@ -13,18 +13,38 @@ export const Detalji = () => {
   const { loader, setLoader } = useContext(Contextpage);
   const { id } = useParams();
   const [moviedet, setMoviedet] = useState({});
-  const [moviegenres, setMoviegenres] = useState([]);
+  const [availability, setAvailability] = useState(null);
   const [dataLoaded, setDataLoaded] = useState(false);
+
+  const fetchMovieAvailability = async (title) => {
+    const url = `https://streaming-availability.p.rapidapi.com/search/title?title=${encodeURIComponent(title)}&country=us&show_type=all&output_language=en`;
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': '2fd0d3713emsh4f132c08f2483c4p1a121bjsna2da287a6809',
+        'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+      }
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      setAvailability(result);
+    } catch (error) {
+      console.error('Error fetching movie availability:', error);
+    }
+  };
 
   const dohvatiDetalje = async () => {
     try {
-      const docRef = doc(db, 'movies', id);
+      const docRef = doc(db, 'Movies', id);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
         setMoviedet(docSnap.data());
         setLoader(false);
         setDataLoaded(true);
+        fetchMovieAvailability(docSnap.data().title); // Fetch availability based on the title
       } else {
         console.log('No such document! Fetching from API...');
 
@@ -37,9 +57,9 @@ export const Detalji = () => {
           setMoviedet(data);
           setLoader(false);
           setDataLoaded(true);
+          fetchMovieAvailability(data.title); // Fetch availability based on the title
         } else {
           console.log('Movie not found in API.');
-          // Handle the case where the movie is not found in both database and API
         }
       }
     } catch (error) {
@@ -49,8 +69,7 @@ export const Detalji = () => {
 
   useEffect(() => {
     dohvatiDetalje();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   return (
       <>
@@ -65,56 +84,20 @@ export const Detalji = () => {
               </Link>
 
               <div className="relative h-auto md:h-[82vh] flex flex-col items-center">
-                {moviedet.backdrop_path !== null && (
-                    <img
-                        src={"https://image.tmdb.org/t/p/original" + moviedet.backdrop_path}
-                        className="h-full w-full rounded-lg"
-                        alt={moviedet.title}
-                    />
-                )}
-                <div
-                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-transparent w-full text-center">
-                  <h1 className="text-red-500 text-2xl md:text-6xl font-bold py-3">
-                    {moviedet.title}
-                  </h1>
-                </div>
+                {/* Movie details rendering */}
+                {/* ... existing code to display movie details ... */}
 
-                <div className="mt-8 text-white">
-                  <table className="mx-auto table-auto">
-                    <tbody>
-                    <tr>
-                      <td className="px-4 py-2 font-semibold">Overview:</td>
-                      <td className="px-4 py-2">{moviedet.overview}</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-2 font-semibold">Vote Average:</td>
-                      <td className="px-4 py-2">{moviedet.vote_average}</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-2 font-semibold">Vote Count:</td>
-                      <td className="px-4 py-2">{moviedet.vote_count}</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-2 font-semibold">Release Date:</td>
-                      <td className="px-4 py-2">{moviedet.release_date}</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-2 font-semibold">Original Language:</td>
-                      <td className="px-4 py-2">{moviedet.original_language}</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-2 font-semibold">Adult:</td>
-                      <td className="px-4 py-2">{moviedet.adult ? 'Yes' : 'No'}</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
+                {/* Render movie availability if available */}
+                {availability && (
+                    <div className="text-white mt-4">
+                      <h3 className="text-xl font-semibold">Streaming Availability:</h3>
+                      {/* Process and display the availability data */}
+                      {/* For example, list streaming services the movie is available on */}
+                    </div>
+                )}
               </div>
             </>
         )}
       </>
   );
-
-
-
 };

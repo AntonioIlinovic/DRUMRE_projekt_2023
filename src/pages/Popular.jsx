@@ -35,12 +35,12 @@ const MoviesList = () => {
             let moviesQuery;
             if (activegenre && activegenre > 0) {
                 moviesQuery = initialFetch
-                    ? query(collection(db, 'movies'), where('genre_ids', 'array-contains', activegenre), orderBy('vote_average', 'desc'), limit(100))
-                    : query(collection(db, 'movies'), where('genre_ids', 'array-contains', activegenre), orderBy('vote_average', 'desc'), startAfter(lastDoc), limit(100));
+                    ? query(collection(db, 'Movies'), where('genre_ids', 'array-contains', activegenre), orderBy('vote_average', 'desc'), limit(100))
+                    : query(collection(db, 'Movies'), where('genre_ids', 'array-contains', activegenre), orderBy('vote_average', 'desc'), startAfter(lastDoc), limit(100));
             } else {
                 moviesQuery = initialFetch
-                    ? query(collection(db, 'movies'), orderBy('vote_average', 'desc'), limit(100))
-                    : query(collection(db, 'movies'), orderBy('vote_average', 'desc'), startAfter(lastDoc), limit(100));
+                    ? query(collection(db, 'Movies'), orderBy('vote_average', 'desc'), limit(100))
+                    : query(collection(db, 'Movies'), orderBy('vote_average', 'desc'), startAfter(lastDoc), limit(100));
             }
 
             const documentSnapshots = await getDocs(moviesQuery);
