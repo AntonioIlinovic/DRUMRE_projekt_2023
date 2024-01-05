@@ -84,7 +84,7 @@ const MoviesList = () => {
         try {
             // Fetch movies from top genres
             let moviesQuery = query(
-                collection(db, 'movies'),
+                collection(db, 'Movies'),
                 where('genre_ids', 'array-contains-any', topGenres),
                 orderBy('vote_average', 'desc'),
                 limit(100)
