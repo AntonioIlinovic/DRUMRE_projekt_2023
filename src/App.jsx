@@ -7,6 +7,7 @@ import Favorites from './pages/Favorites';
 import { MovieProvider } from "./Contextpage";
 import User from './pages/User';
 import Popular from './pages/Popular.jsx'
+import Recommended from "./pages/Recommended.jsx";
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
       <Navigacija />
       <div className="md:ml-[15rem]">
           <Routes>
-              <Route path='/recommended' element={<Main />} />
+              <Route path='/recommended' element={<Recommended />} />
               <Route path='/moviedetail/:id' element={<Detalji />} />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/search/:query" element={<Main/>}/>
